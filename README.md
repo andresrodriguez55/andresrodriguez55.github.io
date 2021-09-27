@@ -20,10 +20,6 @@ I had many doubts about how the server accepted the client's requests and how it
 
 </br>
 </br>
-</br>
-</br>
-</br>
-</br>
 
 ## Database Design
 
