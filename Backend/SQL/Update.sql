@@ -1,0 +1,3 @@
+UPDATE POST SET Content="
+
+" WHERE ID=1;
