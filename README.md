@@ -148,10 +148,10 @@ The important points of the server are that it only accepts POST requests from t
     {
         private $database;
 
-        private $serverName='localhost';
-        private $userName='root';
-        private $password='Yamahapacifica112j';
-        private $nameOfDatabase='BLOG'; 
+        private $serverName='';
+        private $userName='';
+        private $password='';
+        private $nameOfDatabase=''; 
 
         public function connect()
         {
