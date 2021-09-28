@@ -6,7 +6,7 @@ In this project I decided once and for all to immerse myself in the world of the
 
 The first big problem I encountered was choosing the type of database that I would implement here, I really wanted to use a relational database but I knew that doing that would make it very difficult for me to continue the project because I had no idea of what was I going to do with the host issue and partly that I had never had experience with a relational base in a project like this (I do not count one of .net that I have because thanks to blazor and the entity framework they solve many things that I should have learned to do it manually). I saw that mongoDB provided good functionalities and its free version was sufficient for this project but I wanted to implement something really workable already using everything I learned in the database course at university.
 
-![](https://ichi.pro/assets/images/max/724/1*a12jcIx2aBvavjGMht777Q.png)
+![](https://miro.medium.com/max/724/1*a12jcIx2aBvavjGMht777Q.png)
 
 In the end I decided to jump into the pool and once and for all learn to manage to learn faster, in the subject of the uni I only used microsoft sql server (that is transact sql) and this made this adventure bigger, because I looked at the free hosts that circulate around the network normally accepts databases designed with mysql. I was one day thinking about what to use for the backend, on the one hand because I liked java I wanted to use the spring frame, but on the other hand the host issue had me discouraged, so I decided that day to prepare the page with react without thinking about what the rest.
 
