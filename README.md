@@ -18,9 +18,6 @@ I had already heard many complaints about php and many others say that it was dy
 
 I had many doubts about how the server accepted the client's requests and how it accepted POST actions and I am very happy to have implemented php in this project, it is not that I do an incredible job there but at least I am happy with some solutions that I implement for some cases so I will only explain those solutions.
 
-</br>
-</br>
-
 ## Database Design
 
 ![](https://drive.google.com/uc?id=1cv7cR4UbBa7yexA6A3t1L1YU6aaOA66I)
@@ -37,9 +34,6 @@ I also want to emphasize that I thought up to the issue of the dates of the comm
 
 | ![](https://drive.google.com/uc?id=1sw23OpEUm3n1A7jgQ-kwGdQB3r3zzHSN) | ![](https://drive.google.com/uc?id=1jYRuTE5sMaEbENZGQS2mJmRCRxHvfzBT)| 
 |:---:|:---:|
-
-</br>
-</br>
 
 ## Triggers & Contraints of SQL
 
@@ -132,9 +126,6 @@ DELIMITER ;
 /* ------------- */
 ```
 
-</br>
-</br>
-
 ## PHP Implementation in The Server Side
 
 The important points of the server are that it only accepts POST requests from the domain of this page, also that the server has been designed using the implementation of the model view controller (MVC) architecture. **To protect the information of the users I never expose out the attributes of their countries and IPs**.
@@ -169,8 +160,6 @@ The important points of the server are that it only accepts POST requests from t
     }
 ?>
 ```
-
-</br>
 
 ### Models
 
@@ -329,8 +318,6 @@ The important points of the server are that it only accepts POST requests from t
 ?>
 ``` 
 
-</br>
-
 ### Post Funcions Requests
 
 #### ReadAll.php
@@ -395,7 +382,6 @@ The important points of the server are that it only accepts POST requests from t
     $database->disconnect();
 ?>
 ```
-</br> 
 
 ### UserComment Funcions Requests
 
@@ -485,9 +471,6 @@ The important points of the server are that it only accepts POST requests from t
 ?>
 ```
 
-</br>
-</br>
-
 ## React Implementation in The Client Side
 
 For the content reading issue, I have used the [react-markdown](https://github.com/remarkjs/react-markdown), [remark-gfm](https://github.com/remarkjs/remark-gfm) and [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) libraries, because it facilitates both the editing and the display of the content, I name these libraries because the truth It has fascinated me that thanks to them, great things can be done in a short time.
@@ -495,9 +478,6 @@ For the content reading issue, I have used the [react-markdown](https://github.c
 On the client side, I would only like to highlight one thing, I have even thought about the issue of a wrong url, as I have shown before in the server part to show a post, the only thing that is necessary is to give its ID, but what if would there be a wrong title in the url? For this reason on the client side I control if the title also matches the content of the database, based on that the content is loaded or if the user is not told that the post he is requesting does not exist.
 
 All the other scripts that I have not shown you can see them in my github.
-
-</br>
-</br>
 
 ## Host
 
