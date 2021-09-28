@@ -477,7 +477,7 @@ For the content reading issue, I have used the [react-markdown](https://github.c
 
 On the client side, I would only like to highlight one thing, I have even thought about the issue of a wrong url, as I have shown before in the server part to show a post, the only thing that is necessary is to give its ID, but what if would there be a wrong title in the url? For this reason on the client side I control if the title also matches the content of the database, based on that the content is loaded or if the user is not told that the post he is requesting does not exist.
 
-All the other scripts that I have not shown you can see them in my github.
+
 
 ## Host
 
