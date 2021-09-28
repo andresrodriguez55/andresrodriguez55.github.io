@@ -390,7 +390,7 @@ The important points of the server are that it only accepts POST requests from t
 <?php
     $http_referer = $_SERVER['HTTP_REFERER'];
 
-    if ($http_referer != 'http://localhost:3001' && $http_referer == 'https://andresrodriguez55.github.io')
+    if ($http_referer != 'http://localhost:3001' && $http_referer != 'https://andresrodriguez55.github.io/')
     {  
         echo 'Access denegated...';
         exit();
