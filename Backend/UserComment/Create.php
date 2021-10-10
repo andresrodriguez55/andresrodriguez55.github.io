@@ -33,8 +33,7 @@
     $geoInfo = file_get_contents('http://ip-api.com/json/' . $comment->IP);
     $geoInfo = json_decode($geoInfo);
     $comment->Country = $geoInfo->country;
-    
-    date_default_timezone_set($comment->TimeZone);
+  
     $comment->CommentDate=date('Y-m-d H:i:s', time());
 
     if($comment->canThisUserMakeTodayAComment()=="1")
