@@ -1,4 +1,4 @@
-# Full Stack Blog With a Comment System And Admin Panel With PHP, React & MYSQL
+# Full Stack Blog With a Admin Panel And Comment System For Users With PHP, React & MYSQL
 
 [LINK](https://andresrodriguez55.github.io/#/)
 
