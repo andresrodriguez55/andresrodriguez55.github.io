@@ -36,7 +36,6 @@ CREATE TABLE USER_COMMENT
 		Content VARCHAR(280) NOT NULL, /* La longitud maxima de un tweet de twiter es 280! */
 		CommentDate DATETIME NOT NULL,
         IP VARCHAR(45) NOT NULL, /* The correct maximum IPv6 string length is 45! */
-        TimeZone VARCHAR(30) NOT NULL, /* The Area and Location names have a maximum length of 14 characters! */
         Country VARCHAR(56), /* max: The United Kingdom of Great Britain and Northern Ireland (56) , min: 4*/
 
 		PRIMARY KEY (ID),
@@ -46,7 +45,6 @@ CREATE TABLE USER_COMMENT
 		CONSTRAINT `MinimumNickLength` CHECK(LENGTH(Nick)>=3),
 		CONSTRAINT `MinimumCommentLength`CHECK(LENGTH(Content)>=2),
         CONSTRAINT `MinimumIPLength` CHECK (LENGTH(IP)>=7),
-        CONSTRAINT `MinimumTimeZoneNameLength` CHECK (LENGTH(TimeZone)>=5),
         CONSTRAINT `MinimumCountryNameLength` CHECK (LENGTH(Country)>=4)
 );
 /* ------------ */
