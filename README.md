@@ -14,13 +14,11 @@
 
 ![](https://drive.google.com/uc?id=1cv7cR4UbBa7yexA6A3t1L1YU6aaOA66I)
 
-As you can see in the diagram, the base is very basic, but sufficient for all the inconveniences that could arise. For the management of the posts that I do it was obvious that I needed the POST and CATEGORY entities, the attributes that they contain that are also seen were also obvious that I needed them so I am not going to go into detail about them, I think the strong point of all this it is everything related to the USER_COMMENT table so I am going to delve into this table.
+As you can see in the diagram, the base is very basic, but sufficient for all the inconveniences that could arise. For the management of the posts that I do it was obvious that I needed the POST and CATEGORY entities, the attributes that they contain that are also seen were also obvious that I needed them so I am not going to go into detail about them.
 
 The BLOG_ADMIN table has no relationship with the POST table because **I will only be the admin, the table will be used to save my data, guaranteeing even more security in the backend (because if I saved it in some php document I could expose at some risk).**
 
-It is obvious that in this table, looking at it logically, the attributes related to geolocation are highlighted so I will get to the point with them, I decided to require these attributes to somehow **avoid customer spam**.
-
-I looked at free comment services such as disqus but they did not convince me, aesthetically they will look very good but after not making a system I did not make sense to use them, so after thinking I decided to **make a basic system such that every time a client do a POST action, the client's IP will be checked in the database if the client reached a limit of comments chosen by me on that day**.
+**The USER_COMMENT table will save the IPs of the users in order to handle spam, users will be allowed to publish only 3 comments in 24 hours.** The country attribute will be used for general administration information.
 
 ![](https://drive.google.com/uc?id=1OXwy14lTQdQdsPLJzr2q0T6kYRJj4Tl3)
 
