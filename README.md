@@ -32,7 +32,6 @@ I also want to emphasize that I thought up to the issue of the dates of the comm
 
 | ![](https://drive.google.com/uc?id=1SiHjdHBO-VtZ2iin3vKMAMfZ3bWUBIZR) | ![](https://drive.google.com/uc?id=1IgSKtClvksRfri5yAaigM01ayJKp1k54)| 
 |:---:|:---:|
-| ![](https://drive.google.com/uc?id=1oXULGBAvd39--KpmosTPclulotbZRue1) | ![](https://drive.google.com/uc?id=1G3Cr88_7R_1MNtvUResQpQg8uFcPoEPI)| 
 
 I do this by doing the conversions of hours on the client side, on the server the dates will be saved in the Istanbul timezone.
 
