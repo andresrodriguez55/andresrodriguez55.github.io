@@ -33,6 +33,8 @@ I do this by doing the conversions of hours on the client side, on the server th
 
 The important points of the server are that it only accepts POST requests from the domain of this page, also that the server has been designed using the implementation of the model view controller (MVC) architecture. **To protect the information of the users I never expose out the attributes of their countries and IPs**.
 
+For the post actions related to administrative actions, they will **always be controlled with the user information**, so if, for example, a request is made to publish a post, the username and password of admin will also be expected, this is done to have greater security, also does not generate performance problems since there will only be one admin.
+
 ## Admin Panel
 
 ![](https://drive.google.com/uc?id=1QVpYxVbqpA7aU-f4AsU2v3dJlom5Gxnc)
@@ -50,8 +52,6 @@ You could say that the admin panel is a CRUD application.
 I have also put the statistics in the admin section before starting the session, I do this with the purpose of exposing them a little outwards.
 
 ![](https://drive.google.com/uc?id=1qheFvHKWyTJVwxfHIwLBZDVn-bvyvse3)
-
-Finally I would like to highlight that **always before making a POST request the admin user data will be reviewed, this I do with all the purpose of being safe**.
 
 ## React Implementation in The Client Side
 
