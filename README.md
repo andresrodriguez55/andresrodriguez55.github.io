@@ -1,7 +1,6 @@
-# Full Stack Blog With a Admin Panel And Comment System For Users Created With PHP, React & MYSQL
+# Implementation of a Full Stack Blog With a Comment System And Admin Panel With PHP, React & MYSQL
 
 [SITE LINK](https://andresrodriguez55.github.io/#/)
-
 
 ## Contents
 - Database Design 
