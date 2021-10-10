@@ -47,6 +47,17 @@ CREATE TABLE USER_COMMENT
         CONSTRAINT `MinimumIPLength` CHECK (LENGTH(IP)>=7),
         CONSTRAINT `MinimumCountryNameLength` CHECK (LENGTH(Country)>=4)
 );
+
+CREATE TABLE BLOG_ADMIN
+(
+	AdminUsername VARCHAR(20), 
+	AdminPassword VARCHAR(20) NOT NULL, 
+    
+    PRIMARY KEY (AdminUsername),
+    
+    CONSTRAINT `MinimumAdminUsernameLength`CHECK(LENGTH(AdminUsername)>=3),
+	CONSTRAINT `MinimumAdminPasswordLength` CHECK(LENGTH(AdminPassword)>=3)
+);
 /* ------------ */
 
 /* ---TRIGGER--- */
