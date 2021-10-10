@@ -2,7 +2,6 @@
 
 [SITE LINK](https://andresrodriguez55.github.io/#/)
 
-
 ## Contents
 - Database Design 
 - PHP Implementation in The Server Side
