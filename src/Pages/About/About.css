@@ -1,0 +1,21 @@
+.aboutScreen
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width:800px)
+{
+    .aboutScreen
+    {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:800px)
+{
+    .aboutScreen
+    {
+        width: 85%;
+    }
+}
