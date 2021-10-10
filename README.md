@@ -136,9 +136,10 @@ For the post actions related to administrative actions, they will **always be co
 
 ## Admin Panel
 
-![](https://drive.google.com/uc?id=1QVpYxVbqpA7aU-f4AsU2v3dJlom5Gxnc)
-
 To raise the level of the project I have decided to make an admin panel, so to be able to make a fully functional application for any client, the panel is completely designed for my personal use. 
+
+Here is a demo:
+[![Watch the video](https://drive.google.com/uc?id=1QVpYxVbqpA7aU-f4AsU2v3dJlom5Gxnc)](https://www.youtube.com/watch?time_continue=73&v=Nyqlh5KCj0M&feature=emb_title)
 
 I can edit the nicknames and comments of the users (due in case I should delete some part of them) and directly delete the comments, I can add, edit and delete the categories and finally I can create, delete and edit the posts.
 
