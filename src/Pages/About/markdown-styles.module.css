@@ -1,0 +1,23 @@
+
+.reactMarkDown h1, .reactMarkDown h2,
+.reactMarkDown h3, .reactMarkDown h4,
+.reactMarkDown h5, .reactMarkDown h6,
+.reactMarkDown p
+{
+    overflow-wrap: break-word; 
+    word-break: break-word;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.reactMarkDown div
+{
+    width: 100%;
+    text-align: center;
+}
+
+.reactMarkDown img
+{
+    margin-top: -10px;
+    width:16vh;
+}
