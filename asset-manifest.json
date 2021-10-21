@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.fffdc86f.chunk.css",
+    "main.css": "/static/css/main.ac4abb22.chunk.css",
     "main.js": "/static/js/main.fbddb682.chunk.js",
     "main.js.map": "/static/js/main.fbddb682.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.289b7748.js",
@@ -8,7 +8,7 @@
     "static/js/2.d9640008.chunk.js": "/static/js/2.d9640008.chunk.js",
     "static/js/2.d9640008.chunk.js.map": "/static/js/2.d9640008.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.fffdc86f.chunk.css.map": "/static/css/main.fffdc86f.chunk.css.map",
+    "static/css/main.ac4abb22.chunk.css.map": "/static/css/main.ac4abb22.chunk.css.map",
     "static/js/2.d9640008.chunk.js.LICENSE.txt": "/static/js/2.d9640008.chunk.js.LICENSE.txt",
     "static/media/ContentAbout.9247f78b.md": "/static/media/ContentAbout.9247f78b.md",
     "static/media/personAndGuitar.24374079.jpg": "/static/media/personAndGuitar.24374079.jpg",
@@ -17,7 +17,7 @@
   "entrypoints": [
     "static/js/runtime-main.289b7748.js",
     "static/js/2.d9640008.chunk.js",
-    "static/css/main.fffdc86f.chunk.css",
+    "static/css/main.ac4abb22.chunk.css",
     "static/js/main.fbddb682.chunk.js"
   ]
 }
