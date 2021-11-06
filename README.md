@@ -53,9 +53,7 @@ I would also like to emphasize that when a new post is published, such a functio
 
 To raise the level of the project I have decided to make an admin panel, so to be able to make a fully functional application for any client, the panel is completely designed for my personal use. 
 
-Here is a demo:
-
-<iframe width='560' height='315' src='https://www.youtube.com/embed/Nyqlh5KCj0M' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+[Here is a demo...](https://www.youtube.com/watch?v=Nyqlh5KCj0M)
 
 **The content of the posts is markdown type, this is because it makes it very easy to write new posts, in addition html content is also accepted, in the frontend I adapt the positions and sizes of images and videos, which makes everything even easier. In addition, I have also incorporated a markdown content viewer on the right which exactly emulates the client's view.**
 
