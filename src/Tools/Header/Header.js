@@ -3,11 +3,13 @@ import {useHistory} from "react-router-dom";
 import "./Header.css"
 import logo from '../../Tools/Images/personAndGuitar.jpg';
 
+import { prefixURLBackend } from '../PrefixURLBackend/PrefixURLBackend';
+
 export default function Header() 
 {
     const history=useHistory();
 
-    function redirect(category)
+    async function redirect(category)
     {
         switch(category)
         {
@@ -23,8 +25,36 @@ export default function Header()
                 history.push("/about");
                 break;
 
-            default :
-                history.push("/admin");  
+            case "suscribe":
+                const userEmail=prompt("Please enter the email to which you want to receive notifications about new posts:");
+        
+                const IP=await fetch("https://api.db-ip.com/v2/free/self", {method:"GET"}).then
+                (
+                    async(information)=> await information.json().then
+                    ( 
+                        data=>{ return data.ipAddress })
+                    ).catch(e=>alert("Fatal error...")
+                );
+
+                const formData = new FormData();
+                formData.append("Email", userEmail);
+                formData.append("IP", IP);
+
+                await fetch((prefixURLBackend+"SuscribedEmails/PostEmail.php"),
+                {
+                    method: "POST",
+                    body: formData
+                }).then(async(response)=>{await response.text()
+                .then((result)=>
+                {
+                    alert(result);
+                })});       
+
+                break;
+
+            case "admin" :
+                history.push("/admin");
+                break;  
         }   
     };
 
@@ -57,11 +87,19 @@ export default function Header()
                             </span>
                         </div>
                     </li>
-                    
+     
                     <li>
                         <div className="headerCategoryArea">
                             <span className="headerCategoryFont" onClick={()=>{redirect("about")}}>
                                 About
+                            </span>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div className="headerCategoryArea">
+                            <span className="headerCategoryFont" onClick={()=>{redirect("suscribe")}}>
+                                Suscribe
                             </span>
                         </div>
                     </li>
