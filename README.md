@@ -5,13 +5,14 @@
 [SITE LINK](https://andresrodriguez55.github.io/#/)
 
 ## Contents
-- Database Design 
+- Database Design
 - PHP Implementation in The Server Side
 - Admin Panel
 - React Implementation in The Client Side
 - Host
 
-## Database Design 
+
+## Database Design
 
 ![](https://drive.google.com/uc?id=1cv7cR4UbBa7yexA6A3t1L1YU6aaOA66I)
 
@@ -23,34 +24,40 @@ The BLOG_ADMIN table has no relationship with the POST table because **I will on
 
 ![](https://drive.google.com/uc?id=1OXwy14lTQdQdsPLJzr2q0T6kYRJj4Tl3)
 
-I also want to emphasize that I thought up to the issue of the dates of the comments, I mean the time difference, so **whenever someone comments on a post I will always save the time zone of that client so that whenever I show a comment to another client can adapt the dates of the comments to the time zone of that client**.
+Also in table SUSRIBED_EMAILS the ip will be saved to lower the chances of having an overload in the database.
 
-| ![](https://drive.google.com/uc?id=1sw23OpEUm3n1A7jgQ-kwGdQB3r3zzHSN) | ![](https://drive.google.com/uc?id=1jYRuTE5sMaEbENZGQS2mJmRCRxHvfzBT)| 
-|:---:|:---:|
+![](https://drive.google.com/uc?id=1ENkghFhPpSByKaB4QUWXcmYx7PKnzsBn)
 
-**This detail is also taken into account when the dates of the posts are shown to the user.**
-
-| ![](https://drive.google.com/uc?id=1SiHjdHBO-VtZ2iin3vKMAMfZ3bWUBIZR) | ![](https://drive.google.com/uc?id=1IgSKtClvksRfri5yAaigM01ayJKp1k54)| 
-|:---:|:---:|
-
-I do this by doing the conversions of hours on the client side, on the server the dates will be saved in the Istanbul timezone.
+I will not go into detail about the SQL scripts, they can be seen in the repository of this project on [github](https://github.com/andresrodriguez55/andresrodriguez55.github.io).
 
 <br/>
 
 ## PHP Implementation in The Server Side
 
-The important points of the server are that it only accepts POST requests from the domain of this page, also that the server has been designed using the implementation of the model view controller (MVC) architecture. **To protect the information of the users I never expose out the attributes of their countries and IPs**.
+Within the scripts, there is one that works in context mode, which helps to implement the connection with the database.
 
-For the post actions related to administrative actions, they will **always be controlled with the user information**, so if, for example, a request is made to publish a post, the username and password of admin will also be expected, this is done to have greater security, also does not generate performance problems since there will only be one admin.
+There are objects which represent each entity in the database,
+Each object contains a function focused on the needs of the page, each object will receive an instance of a context object which will help to connect to the database.
+
+Finally there are the scripts which have the function of receiving HTTP requests and being able to respond to them.
+
+The scripts used for administrator actions are special since whenever a get or post request is made referring to an administrator operation, administrator account values will be expected, it is not very correct to do this but it **increases the security in these operations.**
+
+I would also like to emphasize that when a new post is published, such a function will be implemented backwards that works with the [sendgrid](https://sendgrid.com/) service, which helps to notify subscribed users about a new post, also giving in such email the option to unsubscribe from the blog.
 
 <br/>
 
 ## Admin Panel
 
+![](https://drive.google.com/uc?id=1QVpYxVbqpA7aU-f4AsU2v3dJlom5Gxnc)
+
 To raise the level of the project I have decided to make an admin panel, so to be able to make a fully functional application for any client, the panel is completely designed for my personal use. 
 
-Here is a demo [(click on the photo or here to see the video)](https://www.youtube.com/watch?time_continue=73&v=Nyqlh5KCj0M&feature=emb_title): 
-[![Watch the video](https://drive.google.com/uc?id=1QVpYxVbqpA7aU-f4AsU2v3dJlom5Gxnc)](https://www.youtube.com/watch?time_continue=73&v=Nyqlh5KCj0M&feature=emb_title)
+Here is a demo:
+
+<iframe width='560' height='315' src='https://www.youtube.com/embed/Nyqlh5KCj0M' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+
+**The content of the posts is markdown type, this is because it makes it very easy to write new posts, in addition html content is also accepted, in the frontend I adapt the positions and sizes of images and videos, which makes everything even easier. In addition, I have also incorporated a markdown content viewer on the right which exactly emulates the client's view.**
 
 I can edit the nicknames and comments of the users (due in case I should delete some part of them) and directly delete the comments, I can add, edit and delete the categories and finally I can create, delete and edit the posts.
 
@@ -68,9 +75,23 @@ I have also put the statistics in the admin section before starting the session,
 
 ## React Implementation in The Client Side
 
+The subject of design and user experience was thought very basic, <u>this subject will be reviewed soon.</u>
+
 For the content reading issue, I have used the [react-markdown](https://github.com/remarkjs/react-markdown), [remark-gfm](https://github.com/remarkjs/remark-gfm) and [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) libraries, because it facilitates both the editing and the display of the content, I name these libraries because the truth It has fascinated me that thanks to them, great things can be done in a short time.
 
 On the client side, I would only like to highlight one thing, I have even thought about the issue of a wrong url, as I have shown before in the server part to show a post, the only thing that is necessary is to give its ID, but what if would there be a wrong title in the url? For this reason on the client side I control if the title also matches the content of the database, based on that the content is loaded or if the user is not told that the post he is requesting does not exist.
+
+I also want to emphasize that I thought up to the issue of the dates of the comments, I mean the time difference, so **whenever someone comments on a post I will always save the time zone of that client so that whenever I show a comment to another client can adapt the dates of the comments to the time zone of that client**.
+
+| ![](https://drive.google.com/uc?id=1sw23OpEUm3n1A7jgQ-kwGdQB3r3zzHSN) | ![](https://drive.google.com/uc?id=1jYRuTE5sMaEbENZGQS2mJmRCRxHvfzBT)| 
+|:---:|:---:|
+
+**This detail is also taken into account when the dates of the posts are shown to the user.**
+
+| ![](https://drive.google.com/uc?id=1SiHjdHBO-VtZ2iin3vKMAMfZ3bWUBIZR) | ![](https://drive.google.com/uc?id=1IgSKtClvksRfri5yAaigM01ayJKp1k54)| 
+|:---:|:---:|
+
+I do this by doing the conversions of hours on the client side, on the server the dates will be saved in the Istanbul timezone.
 
 <br/>
 
