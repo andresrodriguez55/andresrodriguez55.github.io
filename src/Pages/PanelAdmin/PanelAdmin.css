@@ -109,3 +109,11 @@ input, button, label, select
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.markdown table, th, td 
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+    text-align: center;
+}

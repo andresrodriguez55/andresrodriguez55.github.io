@@ -11,6 +11,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import  railscasts  from 'react-syntax-highlighter/dist/esm/styles/hljs/railscasts';
 import remarkGfm from 'remark-gfm';
 
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+
+
 import "./PanelAdmin.css"
 
 export default function PanelAdmin({user})
@@ -408,10 +412,15 @@ export default function PanelAdmin({user})
 
         data.append("ID", parseInt(document.getElementById("PostID").value));
         data.append("Title", document.getElementById("PostTitle").value.replaceAll("\"", "\'"));
-        data.append("Content", document.getElementById("PostContent").value.replaceAll("\"", "\'"));
+        data.append("Content", document.getElementById("PostContent").value.replaceAll("\"", "\'").replaceAll("\\", "\\\\"));
         data.append("Category", document.getElementById("PostCategory").value);
         data.append("PostDate", document.getElementById("PostDate").value.replace("T", " ").replaceAll("-","."));
         data.append("CoverPhotoLink", document.getElementById("PostCoverLink").value);
+        
+        //notify to backend if its a new post
+        data.append("isNew", 
+            (posts.length==document.getElementById("PostID").value && 
+            document.getElementById("PostCategory").value!="Private")?"1":"0");
 
         await fetch((prefixURLBackend+"Admin/PostOrUpdatePost.php"),
         {
@@ -493,8 +502,9 @@ export default function PanelAdmin({user})
                     }}
                 />
                 
-                <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]} 
-                    components={{code: markdownCodeThemeComponent}}
+                <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm, rehypeKatex]} 
+                    components={{code: markdownCodeThemeComponent}} 
+                    remarkPlugins={[remarkMath]}
                     children={newPostContent} 
                     className={"markdown"} />
                 <div className="break"/>
