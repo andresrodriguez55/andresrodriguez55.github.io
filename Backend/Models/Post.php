@@ -64,7 +64,7 @@
 
             $query= "SELECT POST.ID AS id, POST.Content AS PostContent, POST.Category AS PostCategory, POST.CoverPhotoLink AS PostCoverPhotoLink, POST.Title AS PostTitle, POST.PostDate, COUNT(USER_COMMENT.PostID) AS NumberOfComments FROM POST LEFT OUTER JOIN USER_COMMENT ON USER_COMMENT.PostID=POST.ID GROUP BY POST.ID ORDER BY POST.PostDate DESC";
 
-            if ($result = mysqli_query($this->database, $query) or die(mysqli_error($this->database))) 
+            if ($result = mysqli_query($this->database, $query) or die("error...")) 
             {
                 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC))
                 {
@@ -83,10 +83,10 @@
                     VALUES( \"$this->Title\", \"$this->Content\", 
                     '$this->PostDate', '$this->Category', '$this->CoverPhotoLink')";
 
-                mysqli_query($this->database, $query) or die("Post action error... " .  mysqli_error($this->database));
+                mysqli_query($this->database, $query) or die("Post action error... " );
                 
                 $query = "SELECT ID FROM POST ORDER BY ID DESC LIMIT 1";
-                if ($result = mysqli_query($this->database, $query) or die("Error for getting new posted post id... " . mysqli_error($this->database))) 
+                if ($result = mysqli_query($this->database, $query) or die("Error for getting new posted post id... " )) 
                 {
                     $row=mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $this->ID = $row["ID"];
