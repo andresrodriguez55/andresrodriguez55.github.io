@@ -111,7 +111,7 @@
         {
             $query="DELETE FROM POST WHERE ID = '$this->ID'";
             
-            mysqli_query($this->database, $query) or die("Post delete error... " . mysqli_error($this->database));
+            mysqli_query($this->database, $query) or die("Post delete error... " );
         }
     }
 ?>
