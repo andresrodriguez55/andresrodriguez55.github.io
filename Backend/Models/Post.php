@@ -96,7 +96,10 @@
                     $row=mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $this->ID = $row["ID"];
 
-                    return 1; //Notify that a new post has been published 
+                    if(strcmp($this->Category, "Private")!=0)
+                    {
+                        return 1; //Notify that a new post has been published 
+                    }
                 }
 
                 else
