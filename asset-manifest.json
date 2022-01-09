@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.12758ff0.chunk.css",
-    "main.js": "/static/js/main.1658b273.chunk.js",
-    "main.js.map": "/static/js/main.1658b273.chunk.js.map",
+    "main.css": "/static/css/main.177eb9f4.chunk.css",
+    "main.js": "/static/js/main.9fff9506.chunk.js",
+    "main.js.map": "/static/js/main.9fff9506.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.289b7748.js",
     "runtime-main.js.map": "/static/js/runtime-main.289b7748.js.map",
     "static/js/2.1ecf7881.chunk.js": "/static/js/2.1ecf7881.chunk.js",
     "static/js/2.1ecf7881.chunk.js.map": "/static/js/2.1ecf7881.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.12758ff0.chunk.css.map": "/static/css/main.12758ff0.chunk.css.map",
+    "static/css/main.177eb9f4.chunk.css.map": "/static/css/main.177eb9f4.chunk.css.map",
     "static/js/2.1ecf7881.chunk.js.LICENSE.txt": "/static/js/2.1ecf7881.chunk.js.LICENSE.txt",
     "static/media/defaultPostImage.30d33787.jpg": "/static/media/defaultPostImage.30d33787.jpg",
     "static/media/personAndGuitar.24374079.jpg": "/static/media/personAndGuitar.24374079.jpg",
@@ -17,7 +17,7 @@
   "entrypoints": [
     "static/js/runtime-main.289b7748.js",
     "static/js/2.1ecf7881.chunk.js",
-    "static/css/main.12758ff0.chunk.css",
-    "static/js/main.1658b273.chunk.js"
+    "static/css/main.177eb9f4.chunk.css",
+    "static/js/main.9fff9506.chunk.js"
   ]
 }
