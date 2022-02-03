@@ -1,0 +1,148 @@
+.blogScreen
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width:800px)
+{
+    .blogScreen
+    {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:800px)
+{
+    .blogScreen
+    {
+        width: 85%;
+    }
+}
+
+.displayCategoriesAndSearchBar
+{
+    margin-bottom: 8px;
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+}
+
+.displayCategoriesAndSearchBar select
+{
+    border: 0px ;
+    border-radius: 2px;
+    padding: 3.02px;
+    background-color: rgba(160, 160, 160, 0.171);
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.displayCategoriesAndSearchBar select:active, 
+    .displayCategoriesAndSearchBar select:focus,
+    .displayCategoriesAndSearchBar select:hover::after
+{
+    box-shadow: none;
+    outline: none;
+    border:0px;
+}
+
+.displayCategoriesAndSearchBar select::selection
+{
+    border: 0px;
+}
+
+.posts
+{
+    margin-left: auto; 
+    margin-right: auto;
+    display: grid;
+    gap:2em;
+}
+
+@media screen and (min-width:500px)
+{
+    .posts
+    {
+        grid-template-columns: 0.6fr 0.6fr;
+        grid-auto-rows: 270px;
+    }
+}
+
+@media screen and (max-width:500px)
+{
+    .posts
+    {
+        grid-auto-rows: 200px;
+    }
+}
+
+.postGrid
+{
+    background-color: rgba(230, 230, 230, 0.308);
+    position: relative;
+    -webkit-transition: all 400ms;
+}
+
+.postGrid:hover, .postGridImage:hover
+{
+    transform: translateY(-6px);
+    transition: all 200ms;
+}
+
+.postGridImage
+{
+    width: 100%;
+    height: 100%;
+    filter: brightness(70%);
+}
+
+.postGridInformation
+{
+    color: white;
+    text-shadow: 1.4px 1.4px 1.4px #000;
+    position: absolute;
+    bottom: 0;
+    padding-left: 7%;
+    padding-right: 7%;
+    margin-bottom: 10px;
+}
+
+.postGridTitle
+{
+    font-size: 105%;
+    margin: 0;
+}
+
+.postGridDate
+{
+    font-size: 52%;
+}
+
+.postGridCategory
+{
+    font-size: 70%;
+}
+
+.morePostsButtonArea
+{
+    width: 70px;
+    height:  30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.morePostsButton
+{
+    width:100%;
+    height: 30px;
+    padding: 7px;
+    cursor: pointer;
+    background-color: rgba(160, 160, 160, 0.096);
+    border: 1.5px solid rgb(160, 160, 160);
+    border-radius: 3px;
+
+}
