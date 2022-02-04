@@ -1,5 +1,7 @@
 # Implementation of a Full Stack Blog With Administration Panel, Notification System and Comment System With PHP, React & MYSQL
 
+**The updates that I make will only be published here as articles, also updating the existing page. When I finish all of them I will update the repository and the documentation.**
+
 [FULL DOCUMENTATION](https://andresrodriguez55.github.io/#/post/1/Implementation%20of%20a%20Full%20Stack%20Blog%20With%20a%20Comment%20System%20And%20Admin%20Panel%20With%20PHP,%20React%20&%20MYSQL)
 
 [SITE LINK](https://andresrodriguez55.github.io/#/)
