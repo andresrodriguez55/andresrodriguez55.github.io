@@ -65,7 +65,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCors(p => p.AddPolicy("corsPolicy", build => 
 {
-    build.WithOrigins(Environment.GetEnvironmentVariable("PAGE_URL")).AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("*").WithMethods("PUT", "POST", "GET", "DELETE");
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("*").WithMethods("PUT", "POST", "GET", "DELETE");
 }));
 
 var app = builder.Build();
