@@ -1,0 +1,66 @@
+.spotifyPlayer
+{
+    position: relative;
+    min-height: 145px;
+    overflow: hidden;
+    padding: 10px 5px 10px 10px;
+    background-color: rgba(160, 160, 160, 0.185);
+    filter: opacity(90%);
+}
+
+.spotifyPlayerImage  
+{
+    float: left;
+}
+
+@media screen and (min-width:800px)
+{
+    .spotifyPlayerImage
+    {
+        width: 145px;
+    }
+}
+
+@media screen and (max-width:800px)
+{
+    .spotifyPlayerImage
+    {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width:360px)
+{
+    .spotifyPlayerImage
+    {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .spotifyPlayerText 
+    {
+        margin-left: -3px;
+    }
+}
+
+.spotifyPlayerSongName
+{
+    font-size: 110%;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: -8px;
+}
+
+.spotifyPlayerSongArtist
+{
+    font-size: 100%;
+    font-weight: 500;
+    margin-bottom: -5px;
+
+}
+
+.spotifyPlayerSongStatus 
+{
+    font-weight: 400;
+    font-size: 90%;
+}
