@@ -1,0 +1,33 @@
+.displayCategoriesAndSearchBar
+{
+    margin-bottom: 8px;
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+}
+
+.displayCategoriesAndSearchBar select
+{
+    border: 0px ;
+    border-radius: 2px;
+    padding: 3.03px;
+    background-color: rgba(160, 160, 160, 0.171);
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+    text-overflow: ellipsis;
+}
+
+.displayCategoriesAndSearchBar select:active, 
+    .displayCategoriesAndSearchBar select:focus,
+    .displayCategoriesAndSearchBar select:hover::after
+{
+    box-shadow: none;
+    outline: none;
+    border:0px;
+}
+
+.displayCategoriesAndSearchBar select::selection
+{
+    border: 0px;
+}

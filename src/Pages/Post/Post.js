@@ -1,22 +1,19 @@
 import React from 'react';
-
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import  railscasts  from 'react-syntax-highlighter/dist/esm/styles/hljs/railscasts';
-import remarkGfm from 'remark-gfm';
-
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-
 import { useLocation } from 'react-router-dom';
-
 import "./Post.css";
-import style from "./markdown-styles.module.css";
-
 import { FadeLoader } from 'react-spinners';
 
-import defaultImage from '../../Tools/Images/defaultPostImage.jpg';
+
+import DateUtil from '../../util/DateUtil';
+import ApiPostService from '../../api/ApiPostService';
+import ApiSubscribedEmailService from '../../api/ApiSubscribedEmailService';
+import ApiCountryService from '../../api/ApiCountryService';
+import ApiCommentService from '../../api/ApiCommentService';
+
+
+import PostComponent from './components/PostComponent';
+import SubscribeComponent from './components/SubscribeComponent';
+
 
 export default function Post()
 {
@@ -25,166 +22,79 @@ export default function Post()
     const urlID=informationUrl[2];
 
     const [post, setPost] = React.useState(null);
+    const [comments, setComments] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
     const [clientCountry, setClientCountry]=React.useState("Unknown");
 
     const [commentParentId, setCommentParentId] = React.useState(null);
-    const nicksByCommentId = {}
 
     const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+
+    const apiPostService = new ApiPostService(process.env.REACT_APP_BACKEND_URL);
+    const apiCommentService = new ApiCommentService(process.env.REACT_APP_BACKEND_URL);
+    const apiCountryService = new ApiCountryService(process.env.CLIENT_COUNTRY_FINDER_API);
+    const apiSubscribedEmailService = new ApiSubscribedEmailService(process.env.REACT_APP_BACKEND_URL);
 
     React.useEffect(async()=>
     {
         await fetchPost();
+        await fetchComments();
         await fetchClientCountry();
     }, []);
 
     const fetchClientCountry=async()=>
     {
-        await fetch("https://ipapi.co/json/").then(async(response) =>
-        {
-            if(response.ok)
-            {
-                const info = await response.json();
-                setClientCountry(info.country_name);
-            }
-        }).catch(error => console.log(error));
+        try{
+            const country = await apiCountryService.fetchClientCountry();
+            setClientCountry(country);
+        } catch(error){
+            console.log(`Failed to fetch country: ${error.message}`)
+        }
     };
 
     const fetchPost=async()=>
     {
         setIsLoading(true);
-
-        const urlToFetch = process.env.REACT_APP_BACKEND_URL + "Post/" + urlID.toString();
-        await fetch(urlToFetch).then(async(response)=>
-        {
-            if(response.ok)
-            {
-                const postJson = await response.json();
-                setPost(postJson);
-            }
-        }).catch(error => console.log(error));
-
-        setIsLoading(false);
-    };
-
-    const markdownCodeThemeComponent=(props)=>
-    {
-        return (
-            <SyntaxHighlighter style={railscasts} language={(props.className)?props.className.substring(9):""} 
-                children={(props.children)?props.children:""}/>
-        );
-    };
-
-    const convertStringDateTimezoneToClient=(stringDate)=>
-    {
-        const serverDate=new Date(stringDate.replace("T", " ")+" +03:00"); //Server timezone
-
-        if(serverDate.toString().localeCompare("Invalid Date")!=0)
-        {
-            return serverDate.toLocaleString('es-ES', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
-                day: 'numeric',  month: '2-digit', year: 'numeric', hour: "2-digit", minute:"2-digit",
-                hour12: false });
+        try {
+            const post = await apiPostService.fetchPost(urlID);
+            setPost(post);
+        } catch (error) {
+            console.error('Failed to fetch post:', error);
+            alert('Failed to fetch post. Please try again later.');
+        } finally {
+            setIsLoading(false);
         }
-    
-        //Prevent invalid date, return actual client date
-        return new Date().toLocaleString('es-ES', {  day: 'numeric',  month: '2-digit', year: 'numeric', 
-            hour: "2-digit", minute:"2-digit", hour12: false });
     };
 
-    const printPost=()=>
+    const fetchComments=async()=>
     {
-        return(
-            <div className="PostArea">
-                <div className='postInfo' >
-                    <img alt='' className='postImage' src={post.coverPhotoLink} 
-                        onError={({ currentTarget }) => {currentTarget.onerror = null; currentTarget.src=defaultImage}}/>
-                        <div className='postHeaderText'>
-                            <h1 className='postTitleX' align='center'>{post.title}</h1>
-                            <h6 className='postDate' align='center'>{convertStringDateTimezoneToClient(post.postDate)}</h6>
-                        </div>
-                </div>
-                <br/>
-                <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm, rehypeKatex]} 
-                    components={{code: markdownCodeThemeComponent}}
-                    remarkPlugins={[remarkMath]}
-                    children={post.content} className={style.reactMarkDown} />
-            </div>
-        );
+        setIsLoading(true);
+        try {
+            const comments = await apiCommentService.fetchComments(urlID);
+            setComments(comments);
+        } catch (error) {
+            console.error('Failed to fetch comments:', error);
+            alert('Failed to fetch comments. Please try again later.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const [subscriptionMessage, setSubscriptionMessage] = React.useState("Thank you for subscribing!");
-    const [subscriptionButtonMessage, setSubscriptionButtonMessage] = React.useState("Subscribe");
 
-    const postSubscription = async()=>
-    {
-        setSubscriptionButtonMessage("Loading");
-
-        const email = {email: document.getElementById("subscribeEmailInput").value};
-        const urlToFetch = process.env.REACT_APP_BACKEND_URL + "SuscribedEmail";
-        await fetch((urlToFetch), {method: "POST", headers: {'Content-Type': "application/json"},
-            body: JSON.stringify(email) }).then(async(response)=>
-        {
-            if(response.ok)
-            {
-                document.getElementById('subscribeForm')?.classList.add('done');
-            }
-            else
-            {
-                const message = await response.text();
-                if(message.substring(0, 9) === 'Duplicate')
-                {
-                    document.getElementById('subscribeForm')?.classList.add('done');
-                    setSubscriptionMessage("You are already subscribed!");
-                }
-                else
-                {
-                    document.getElementById('subscribeEmailInput').reportValidity();
-                    setSubscriptionButtonMessage("Subscribe");
-                }
-            }
-        }).catch(e => setSubscriptionMessage("Server error..."));     
-    };
-
-    const printSubscribeButton = ()=>
-    {
-        return (
-            <div class="subscribeButtoncontainer">
-                <h4>Subscribe to receive new posts announcements</h4>
-                <div class="subscribeButtonContent">
-                    <form class="subscribeForm" id="subscribeForm">
-                        <input class="subscribeEmailInput" id="subscribeEmailInput"
-                            type="email" placeholder="subscribe@me.now" onKeyPress={(e)=>{
-                                if(e.code === 'Enter')
-                                {
-                                    postSubscription();
-                                }
-                            }}/>
-                        <button class="subscribeButton" type="button" id="subscribeButton" onClick={()=>postSubscription()}>
-                            <span class="before-submit">{subscriptionButtonMessage}</span>
-                            <span class="after-submit">{subscriptionMessage}</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        );
-    }
 
     const printComments=()=>
     {
         return(
-            post.userComments?.map(parentComment=>
+            comments?.map(parentComment=>
             {
-                nicksByCommentId[parentComment.id] = parentComment.nick;
-
                 return(
                     <div>
                         <div className="userCommentArea" id={parentComment.id.toString()}>
-                            <h4 className="userCommentNick">{parentComment.nick}</h4>
+                            <h4 className="userCommentNick">{parentComment.nickname}</h4>
                             <p className="userCommentDate">
                             {
-                                convertStringDateTimezoneToClient(parentComment.commentDate)
+                                DateUtil.convertStringDateTimezoneToClient(parentComment.date)
                             }
                             </p>
                             <p className="userCommentContent">{parentComment.content}</p>
@@ -199,24 +109,20 @@ export default function Post()
                             (commentParentId !== parentComment.id) ? null : commentForm()
                         }
                         {
-                            parentComment.inverseParent.map(childComment =>
+                            parentComment.childrenComments.map(childComment =>
                             {
-                                nicksByCommentId[childComment.id] = childComment.nick;
-                                
                                 return(
                                     <div>
                                         <div className={"userCommentArea childUserCommentArea"} id={childComment.id.toString()}>
-                                            <h4 className="userCommentNick">{childComment.nick}</h4>
+                                            <h4 className="userCommentNick">{childComment.nickname}</h4>
                                             <p className="userCommentDate">
                                             {
-                                                convertStringDateTimezoneToClient(childComment.commentDate)
+                                                DateUtil.convertStringDateTimezoneToClient(childComment.date)
                                             }
                                             </p>
                                             <p className="userCommentContent">
-                                            <b>{(parentComment.id == childComment.parentId) ? "" : "@"+nicksByCommentId[childComment.parentId]}</b>
-                                            {
-                                                " "+childComment.content
-                                            }
+                                                <div className="userCommentContent" 
+                                                    dangerouslySetInnerHTML={{ __html: childComment.content }} />
                                             </p>
                                             <p className="userCommentReply" onClick={()=>
                                                 setCommentParentId((commentParentId !== childComment.id) ? 
@@ -257,15 +163,15 @@ export default function Post()
         const comment = 
         {
             postId: parseInt(urlID),
-            parentId: commentParentId,
-            nick: document.getElementById("nick").value,
+            parentCommentId: commentParentId,
+            nickname: document.getElementById("nick").value,
             content: document.getElementById("content").value,
             country: clientCountry,
             email: document.getElementById("email").value,
-            notifyReply: document.getElementById("reply").checked ? 1 : 0,
+            notifyEmail: document.getElementById("reply").checked ? true : false,
         };
 
-        const urlToFetch = process.env.REACT_APP_BACKEND_URL + "UserComment";
+        const urlToFetch = process.env.REACT_APP_BACKEND_URL + "comments";
         await fetch((urlToFetch), 
             {method: "POST", body: JSON.stringify(comment), 
             headers: {'Content-Type': "application/json"}}).then(async(response)=>
@@ -273,23 +179,22 @@ export default function Post()
             if(response.ok)
             {
                 const addedComment = await response.json();
-                nicksByCommentId[addedComment.id] = addedComment.nick;
                 
                 var added = false;
-                post.userComments.map((parentComment)=>
+                comments.map((parentComment)=>
                 {
                     if(parentComment.id === addedComment.parentId)
                     {
-                        parentComment.inverseParent.push(addedComment);
+                        parentComment.childrenComments.push(addedComment);
                         added = true;
                     }
                     else
                     {
-                        parentComment.inverseParent.map((childComment)=>
+                        parentComment.childrenComments.map((childComment)=>
                         {
                             if(childComment.id === addedComment.parentId)
                             {
-                                parentComment.inverseParent.push(addedComment);
+                                parentComment.childrenComments.push(addedComment);
                                 added = true;
                             }
                         });
@@ -297,7 +202,7 @@ export default function Post()
                 });
 
                 if(!added)
-                    post.userComments.push(addedComment);
+                    comments.push(addedComment);
 
                 setCommentParentId(-1);
                 setCommentParentId(null);
@@ -351,7 +256,7 @@ export default function Post()
     {
         return(
             <div style={{width:"100%"}}>
-                {printPost()}{printSubscribeButton()}<div className="horizontalLine"/>{printCommentsSection()}
+                {<PostComponent post={post} />}{<SubscribeComponent apiSubscribedEmailService={apiSubscribedEmailService}/>}<div className="horizontalLine"/>{printCommentsSection()}
             </div>
         ); 
     }
