@@ -1,8 +1,8 @@
-import GetAllPostDto from "../dto/response/get/GetAllPostDto";
-import GetPostDto from "../dto/response/get/GetPostDto";
+import GetAllPostsResponse from "../dto/response/get/GetAllPostsResponse";
+import GetPostResponse from "../dto/response/get/GetPostResponse";
 
-export const mapToGetAllPostDto = (post) => {
-    return new GetAllPostDto(
+export const mapToGetAllPostsResponse = (post) => {
+    return new GetAllPostsResponse(
         post.id,
         post.categoryName,
         post.title,
@@ -12,8 +12,8 @@ export const mapToGetAllPostDto = (post) => {
     );
 };
 
-export const mapToGetPostDto = (post) => {
-    return new GetPostDto(
+export const mapToGetPostResponse = (post) => {
+    return new GetPostResponse(
         post.id,
         post.categoryName,
         post.title,

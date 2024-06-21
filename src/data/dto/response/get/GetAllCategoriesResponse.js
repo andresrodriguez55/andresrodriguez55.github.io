@@ -1,4 +1,4 @@
-class GetAllCategoryDto {
+class GetAllCategoriesResponse {
     constructor(id, name, numberOfPosts) {
         this.id = id;
         this.name = name;
@@ -6,4 +6,4 @@ class GetAllCategoryDto {
     }
 }
 
-export default GetAllCategoryDto;
+export default GetAllCategoriesResponse;

@@ -1,54 +1,61 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import ApiPostService from '../../api/ApiPostService';
 import ApiCategoryService from '../../api/ApiCategoryService';
 import CategoriesComponent from './components/CategoriesComponent';
 import PostsComponent from './components/PostsComponent';
 
 export default function Blog() {
-    const { pathname } = useLocation();
-    const [selectedCategory, setSelectedCategory] = useState(pathname === '/' ? 'All' : 'Projects');
+    const { category = 'All', page = '0' } = useParams();
+    const history = useHistory();
+    const [selectedCategory, setSelectedCategory] = useState(category);
     const [categories, setCategories] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [page, setPage] = useState(0);
+    const [pageNum, setPageNum] = useState(parseInt(page, 10));
     const [loading, setLoading] = useState(true);
     const [searchedToken, setSearchedToken] = useState('');
+    const [totalPages, setTotalPages] = useState(0);
+    const [fetchingPosts, setFetchingPosts] = useState(false); // Track fetching status
     const isInitialMount = useRef(true);
 
     const apiPostService = new ApiPostService(process.env.REACT_APP_BACKEND_URL);
     const apiCategoryService = new ApiCategoryService(process.env.REACT_APP_BACKEND_URL);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await fetchCategories();
-                await fetchPosts();
-            } catch (error) {
-                console.error('Failed to initialize data:', error);
-            }
+        const initialize = async () => {
+            await fetchCategories();
+            await fetchPosts();
         };
 
-        fetchData();
+        initialize();
     }, []);
 
+    useEffect(() => {
+        setPosts([]);
+        setPageNum(0);
+        updateURL(selectedCategory, 0);
+        fetchPosts();
+    }, [selectedCategory]);
 
     useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
             return;
         }
-        setPosts([]);
-        setPage(0);
+        updateURL(selectedCategory, pageNum);
         fetchPosts();
-    }, [selectedCategory]);
+    }, [pageNum]);
 
     useEffect(() => {
         if (isInitialMount.current) {
+            isInitialMount.current = false;
             return;
         }
+
         const delay = setTimeout(() => {
             setPosts([]);
-            setPage(0);
+            setPageNum(0);
+            updateURL(selectedCategory, 0);
             fetchPosts();
         }, 800);
 
@@ -66,28 +73,22 @@ export default function Blog() {
     };
 
     const fetchPosts = async () => {
-        setLoading(true);
+        setFetchingPosts(true); // Start fetching
         try {
-            const newPostsPageable = await apiPostService.fetchPostsPageable(page, searchedToken, selectedCategory);
-            newPostsPageable.last ? hideMoreButton() : showMoreButton();
-            const newPosts = newPostsPageable.content;
-            setPosts(prevPosts => [...prevPosts, ...newPosts]);
+            const newPostsPageable = await apiPostService.fetchPostsPageable(pageNum, searchedToken, selectedCategory);
+            setTotalPages(newPostsPageable.totalPages);
+            setPosts(newPostsPageable.content);
         } catch (error) {
             console.error('Failed to fetch posts:', error);
             alert('Failed to fetch posts. Please try again later.');
         } finally {
+            setFetchingPosts(false); // Finish fetching
             setLoading(false);
         }
     };
 
-    const hideMoreButton = () => {
-        const element = document.getElementById('morePostsButton');
-        if (element) element.style.display = 'none';
-    };
-
-    const showMoreButton = () => {
-        const element = document.getElementById('morePostsButton');
-        if (element) element.style.display = 'inline-block';
+    const updateURL = (category, page) => {
+        history.push(`/${category}/${page}`);
     };
 
     return (
@@ -102,9 +103,11 @@ export default function Blog() {
             <PostsComponent
                 posts={posts}
                 loading={loading}
-                page={page}
-                setPage={setPage}
+                page={pageNum}
+                setPage={setPageNum}
+                totalPages={totalPages}
                 fetchPosts={fetchPosts}
+                fetchingPosts={fetchingPosts}
             />
         </div>
     );

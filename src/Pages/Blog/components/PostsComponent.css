@@ -91,3 +91,22 @@
     border-radius: 3px;
 
 }
+.paginationControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.paginationButton {
+    padding: 10px 20px;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.paginationButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

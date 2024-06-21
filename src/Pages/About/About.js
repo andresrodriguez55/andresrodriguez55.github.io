@@ -1,4 +1,3 @@
-import Player from '../../Tools/Spotify/Player';
 
 import logo from './taza.jpg';
 
@@ -25,7 +24,7 @@ export default function About()
             <br/><br/>
             <hr/>
             <br/>
-            <Player/>
+            
             <br/>
             <span>
                 Above you can see what I have heard or am listening to at the moment on spotify.

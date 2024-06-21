@@ -1,4 +1,4 @@
-import { mapToGetAllSubscribedEmailDto } from "../data/mapper/SubscribedEmailMapper";
+import { mapToGetAllSubscribedEmailsResponse } from "../data/mapper/SubscribedEmailMapper";
 
 class ApiSubscribedEmailService {
     constructor(baseUrl) {
@@ -12,7 +12,7 @@ class ApiSubscribedEmailService {
                 throw new Error('Failed to fetch subscribed emails');
             }
             const jsonArray = await response.json();
-            return jsonArray.map(subscribedEmail => mapToGetAllSubscribedEmailDto(subscribedEmail));
+            return jsonArray.map(subscribedEmail => mapToGetAllSubscribedEmailsResponse(subscribedEmail));
         } catch (error) {
             throw new Error(`Failed to fetch subscribed emails: ${error.message}`);
         }

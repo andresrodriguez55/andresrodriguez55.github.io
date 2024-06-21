@@ -1,5 +1,5 @@
-import { mapToGetAllPostDto, mapToGetPostDto } from "../data/mapper/PostMapper";
-import { mapToPageableDto } from "../data/mapper/PageableMapper";
+import { mapToGetAllPostsResponse, mapToGetPostResponse } from "../data/mapper/PostMapper";
+import { mapToGetAllPageableResponse } from "../data/mapper/PageableMapper";
 
 class ApiPostService {
     constructor(baseUrl) {
@@ -20,7 +20,7 @@ class ApiPostService {
                 throw new Error('Failed to fetch posts');
             }
             const json = await response.json();
-            return mapToPageableDto(json, mapToGetAllPostDto);
+            return mapToGetAllPageableResponse(json, mapToGetAllPostsResponse);
         } catch (error) {
             throw new Error(`Failed to fetch posts: ${error.message}`);
         }
@@ -34,7 +34,7 @@ class ApiPostService {
                 throw new Error('Failed to fetch post...');
             }
             const json = await response.json();
-            return mapToGetPostDto(json, mapToGetPostDto);
+            return mapToGetPostResponse(json);
         } catch (error) {
             throw new Error(`Failed to fetch post: ${error.message}`);
         }

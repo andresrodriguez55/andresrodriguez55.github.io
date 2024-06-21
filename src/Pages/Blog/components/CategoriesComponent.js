@@ -21,8 +21,15 @@ const CategoriesComponent = ({ categories, selectedCategory, setSelectedCategory
                     </option>
                 ))}
             </select>
+        </div>
+    );
+};
 
-            <div>
+export default CategoriesComponent;
+
+/*
+
+<div>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -30,8 +37,4 @@ const CategoriesComponent = ({ categories, selectedCategory, setSelectedCategory
                     onChange={(event) => setSearchedToken(event.target.value)}
                 />
             </div>
-        </div>
-    );
-};
-
-export default CategoriesComponent;
+*/

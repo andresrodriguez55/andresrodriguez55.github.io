@@ -1,8 +1,3 @@
-/*************************************************************/
-
-
-/*************************************************************/
-
 .commentsArea
 {
     width: 92%;
@@ -14,34 +9,6 @@
     margin-bottom: 20px;
 }
 
-.commentInputLabel
-{
-    color: white;
-}
-
-.nickInput, .emailInput, .commentInput
-{
-    width: 98.8%;
-    margin-top: 6px;
-}
-
-.nickInput, .emailInput
-{
-    height: 20px;
-    margin-bottom: 10px;
-}
-
-.commentInput
-{
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-.commentPostButton
-{
-    margin-bottom: 0px;
-    margin-right: 10px;
-}
 
 .userCommentArea
 {

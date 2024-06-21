@@ -1,7 +1,7 @@
-import GetAllCategoryDto from "../dto/response/get/GetAllCategoryDto";
+import GetAllCategoriesResponse from "../dto/response/get/GetAllCategoriesResponse";
 
-export const mapToGetAllCategoryDto = (data) => {
-    return new GetAllCategoryDto(
+export const mapToGetAllCategoriesResponse = (data) => {
+    return new GetAllCategoriesResponse(
         data.id,
         data.name,
         data.numberOfPosts

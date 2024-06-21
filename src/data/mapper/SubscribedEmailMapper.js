@@ -1,7 +1,7 @@
-import GetAllSubscribedEmailDto from "../dto/response/get/GetAllSubscribedEmailDto"; 
+import GetAllSubscribedEmailsResponse from "../dto/response/get/GetAllSubscribedEmailsResponse";
 
-export const mapToGetAllSubscribedEmailDto = (data) => {
-    return new GetAllSubscribedEmailDto(
+export const mapToGetAllSubscribedEmailsResponse = (data) => {
+    return new GetAllSubscribedEmailsResponse(
         data.id,
         data.name,
         data.date

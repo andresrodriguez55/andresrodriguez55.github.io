@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GetAllSubscribedEmailDto from '../../../data/dto/response/get/GetAllSubscribedEmailDto';
+import CreateSubscribedEmailRequest from '../../../data/dto/request/create/CreateSubscribedEmailRequest';
 import './SubscribeComponent.css';
 
 const SubscribeComponent = ({ apiSubscribedEmailService }) => {
@@ -13,7 +13,7 @@ const SubscribeComponent = ({ apiSubscribedEmailService }) => {
         }
 
         try {
-            const subscribedEmailDto = GetAllSubscribedEmailDto.email(email);  
+            const subscribedEmailDto = new CreateSubscribedEmailRequest(email);  
             await apiSubscribedEmailService.postSubscribedEmail(subscribedEmailDto);
         } catch (error) {
             console.error('Failed to post subscription:', error.message);

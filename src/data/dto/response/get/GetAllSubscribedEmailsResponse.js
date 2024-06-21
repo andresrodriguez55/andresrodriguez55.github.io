@@ -1,4 +1,4 @@
-class GetAllSubscribedEmailDto {
+class GetAllSubscribedEmailsResponse {
     constructor(id, email, date) {
         this.id = id;
         this.email = email;
@@ -6,4 +6,4 @@ class GetAllSubscribedEmailDto {
     }
 }
 
-export default GetAllSubscribedEmailDto;
+export default GetAllSubscribedEmailsResponse;

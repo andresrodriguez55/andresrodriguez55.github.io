@@ -1,4 +1,4 @@
-class PageableDTO {
+class GetAllPageableResponse {
     constructor(content, pageable) {
         this.content = content || [];
         this.first = pageable.first;
@@ -11,4 +11,4 @@ class PageableDTO {
     }
 }
 
-export default PageableDTO;
+export default GetAllPageableResponse;

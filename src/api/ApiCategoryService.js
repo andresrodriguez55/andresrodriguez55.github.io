@@ -1,4 +1,4 @@
-import { mapToGetAllCategoryDto } from "../data/mapper/CategoryMapper";
+import { mapToGetAllCategoriesResponse } from "../data/mapper/CategoryMapper";
 
 class ApiCategoryService {
     constructor(baseUrl) {
@@ -12,7 +12,7 @@ class ApiCategoryService {
                 throw new Error('Failed to fetch categories');
             }
             const jsonArray = await response.json();
-            return jsonArray.map(category => mapToGetAllCategoryDto(category));
+            return jsonArray.map(category => mapToGetAllCategoriesResponse(category));
         } catch (error) {
             throw new Error(`Failed to fetch categories: ${error.message}`);
         }

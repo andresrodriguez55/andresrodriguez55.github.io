@@ -1,6 +1,6 @@
-import PageableDto from '../dto/PageableDto'
+import GetAllPageableResponse from "../dto/response/get/GetAllPageableResponse.js";
 
-export const mapToPageableDto = (json, mapToConcreteDtoFunction) => {
+export const mapToGetAllPageableResponse = (json, mapToConcreteDtoFunction) => {
     const mappedContent = json.content ? json.content.map(item => mapToConcreteDtoFunction(item)) : [];
 
     const pageable = {
@@ -13,5 +13,5 @@ export const mapToPageableDto = (json, mapToConcreteDtoFunction) => {
         pageNumber: json.pageable.pageNumber || 0
     };
 
-    return new PageableDto(mappedContent, pageable);
+    return new GetAllPageableResponse(mappedContent, pageable);
 };

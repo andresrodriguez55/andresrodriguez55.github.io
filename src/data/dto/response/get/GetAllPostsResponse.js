@@ -1,4 +1,4 @@
-class GetAllPostDto {
+class GetAllPostsResponse {
     constructor(id, categoryName, title, date, coverPhotoLink, commentsCount) {
         this.id = id;
         this.categoryName = categoryName;
@@ -13,4 +13,4 @@ class GetAllPostDto {
     }
 }
 
-export default GetAllPostDto;
+export default GetAllPostsResponse;

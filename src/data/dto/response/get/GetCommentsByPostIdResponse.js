@@ -1,4 +1,4 @@
-class GetAllCommentDto {
+class GetCommentsByPostIdResponse {
     constructor(id, postId, nickname, content, date, childrenComments = []) {
         this.id = id;
         this.postId = postId;
@@ -9,4 +9,4 @@ class GetAllCommentDto {
     }
 }
 
-export default GetAllCommentDto;
+export default GetCommentsByPostIdResponse;
