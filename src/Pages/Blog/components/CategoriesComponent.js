@@ -1,9 +1,12 @@
 import React from 'react';
-import './CategoriesComponent.css'
+import './CategoriesComponent.css';
 
-const CategoriesComponent = ({ categories, selectedCategory, setSelectedCategory, searchedToken, setSearchedToken }) => {
+const CategoriesComponent = ({ categories, selectedCategory, setSelectedCategory,}) => {
     const updateSelectedCategory = (event) => {
-        setSelectedCategory(event.target.value);
+        const newCategory = event.target.value;
+        if (newCategory !== selectedCategory) {
+            setSelectedCategory(newCategory);
+        }
     };
 
     return (
@@ -26,15 +29,3 @@ const CategoriesComponent = ({ categories, selectedCategory, setSelectedCategory
 };
 
 export default CategoriesComponent;
-
-/*
-
-<div>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchedToken}
-                    onChange={(event) => setSearchedToken(event.target.value)}
-                />
-            </div>
-*/

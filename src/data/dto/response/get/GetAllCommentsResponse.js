@@ -1,6 +1,7 @@
 class GetAllCommentsResponse {
-    constructor(postId, parentCommentId, id, email, notifyEmail, nickname, content, country, date) {
+    constructor(postId, postTitle, parentCommentId, id, email, notifyEmail, nickname, content, country, date) {
         this.postId = postId;
+        this.postTitle = postTitle;
         this.parentCommentId = parentCommentId;
         this.id = id;
         this.email = email;

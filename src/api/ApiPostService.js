@@ -1,9 +1,12 @@
-import { mapToGetAllPostsResponse, mapToGetPostResponse } from "../data/mapper/PostMapper";
+import { mapToGetAllPostsResponse, mapToGetPostResponse, 
+    mapToCreatePostResponse, mapToUpdatePostResponse } from "../data/mapper/PostMapper";
 import { mapToGetAllPageableResponse } from "../data/mapper/PageableMapper";
+import ApiBase from "./ApiBase";
 
-class ApiPostService {
+class ApiPostService extends ApiBase{
     constructor(baseUrl) {
-        this.url = `${baseUrl}posts`;
+        super(baseUrl);
+        this.endpoint = `posts`;
     }
 
     async fetchPostsPageable(page, searchedToken, selectedCategory) {
@@ -14,30 +17,27 @@ class ApiPostService {
             ...(selectedCategory !== 'All' && { categoryName: selectedCategory }),
         });
 
-        try {
-            const response = await fetch(`${this.url}?${params.toString()}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts');
-            }
-            const json = await response.json();
-            return mapToGetAllPageableResponse(json, mapToGetAllPostsResponse);
-        } catch (error) {
-            throw new Error(`Failed to fetch posts: ${error.message}`);
-        }
+        const json = await super.get(`${this.endpoint}?${params.toString()}`)
+        return mapToGetAllPageableResponse(json, mapToGetAllPostsResponse);
     }
 
     async fetchPost(id){
-        const url = `${this.url}/${id.toString()}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch post...');
-            }
-            const json = await response.json();
-            return mapToGetPostResponse(json);
-        } catch (error) {
-            throw new Error(`Failed to fetch post: ${error.message}`);
-        }
+        const json = await super.get(`${this.endpoint}/${id.toString()}`)
+        return mapToGetPostResponse(json);
+    }
+
+    async postPost(requestDto) {
+        const responseJson = await super.post(this.endpoint, requestDto);
+        return mapToCreatePostResponse(responseJson);
+    }
+
+    async putPost(id, requestDto) {
+        await super.put(this.endpoint, id, requestDto);
+        //return mapToUpdatePostResponse(responseJson);
+    }
+
+    async deletePost(id) {
+        await super.delete(this.endpoint, id);
     }
 }
 

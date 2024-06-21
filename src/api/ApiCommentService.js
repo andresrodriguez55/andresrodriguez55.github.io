@@ -1,39 +1,41 @@
-import { mapToGetCommentsByPostIdResponse, mapToCreateCommentResponse } from "../data/mapper/CommentMapper";
+import { mapToGetCommentsByPostIdResponse, mapToCreateCommentResponse, 
+    mapToUpdateCommentResponse, mapToGetAllCommentsResponse } from "../data/mapper/CommentMapper";
+import { mapToGetAllPageableResponse } from "../data/mapper/PageableMapper";
+import ApiBase from "./ApiBase";
 
-class ApiCommentService {
+class ApiCommentService extends ApiBase{
     constructor(baseUrl) {
-        this.url = `${baseUrl}comments`;
+        super(baseUrl);
+        this.endpoint = `comments`;
     }
 
-    async fetchComments(postId) {
-        const url = `${this.url}/post/${postId.toString()}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch comments...');
-            }
-            const json = await response.json();
-            return json.map(mapToGetCommentsByPostIdResponse);
-        } catch (error) {
-            throw new Error(`Failed to fetch comments: ${error.message}`);
-        }
+    async fetchCommentsPageable(page, pageSize) {
+        const params = new URLSearchParams({
+            size: pageSize,
+            page: page
+        });
+
+        const json = await super.get(`${this.endpoint}?${params.toString()}`)
+        return mapToGetAllPageableResponse(json, mapToGetAllCommentsResponse);
     }
 
-    async postComment(createCommentDto) {
-        try {
-            const response = await fetch(this.url, {
-                    method: "POST", 
-                    headers: {'Content-Type': "application/json"},
-                    body: JSON.stringify(createCommentDto) });
-            if (!response.ok) {
-                const errorMessage = responseJson.message || 'Failed to post comment.';
-                throw new Error(errorMessage);
-            }
-            const responseJson = await response.json();
-            return mapToCreateCommentResponse(responseJson);
-        } catch (error) {
-            throw new Error(`${error.message}`);
-        }
+    async fetchCommentsOfPost(postId) {
+        const jsonArray = await super.get(`${this.endpoint}/post/${postId.toString()}`);
+        return jsonArray.map(mapToGetCommentsByPostIdResponse);
+    }
+
+    async postComment(requestDto) {
+        const responseJson = await super.post(this.endpoint, requestDto);
+        return mapToCreateCommentResponse(responseJson);
+    }
+
+    async putComment(id, requestDto) {
+        await super.put(this.endpoint, id, requestDto);
+        //return mapToUpdateCommentResponse(responseJson);
+    }
+
+    async deleteComment(id) {
+        await super.delete(this.endpoint, id);
     }
 }
 

@@ -59,7 +59,7 @@ export default function Post() {
     const fetchComments = async () => {
         //setIsLoading(true);
         try {
-            const comments = await apiCommentService.fetchComments(urlID);
+            const comments = await apiCommentService.fetchCommentsOfPost(urlID);
             setComments(comments);
         } catch (error) {
             console.error('Failed to fetch comments:', error);

@@ -7,3 +7,5 @@ class CreatePostResponse {
         this.coverPhotoLink = coverPhotoLink;
     }
 }
+
+export default CreatePostResponse;

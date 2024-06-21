@@ -1,21 +1,22 @@
-import { mapToGetAllSubscribedEmailsResponse } from "../data/mapper/SubscribedEmailMapper";
+import { mapToGetAllSubscribedEmailsResponse, mapToCreateSubscribedEmailResponse, 
+    mapToUpdateSubscribedEmailResponse } from "../data/mapper/SubscribedEmailMapper";
+import { mapToGetAllPageableResponse } from "../data/mapper/PageableMapper";
+import ApiBase from "./ApiBase";
 
-class ApiSubscribedEmailService {
+class ApiSubscribedEmailService extends ApiBase {
     constructor(baseUrl) {
-        this.url = `${baseUrl}subscribed-emails`;
+        super(baseUrl);
+        this.endpoint = `subscribed-emails`;
     }
 
-    async fetchSubscribedEmails() {
-        try {
-            const response = await fetch(this.url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch subscribed emails');
-            }
-            const jsonArray = await response.json();
-            return jsonArray.map(subscribedEmail => mapToGetAllSubscribedEmailsResponse(subscribedEmail));
-        } catch (error) {
-            throw new Error(`Failed to fetch subscribed emails: ${error.message}`);
-        }
+    async fetchSubscribedEmailsPageable(page, size) {
+        const params = new URLSearchParams({
+            page: page,
+            size: size
+        });
+
+        const json = await super.get(`${this.endpoint}?${params.toString()}`);
+        return mapToGetAllPageableResponse(json, mapToGetAllSubscribedEmailsResponse);
     }
 
     async postSubscribedEmail(subscribedEmailDto) {
@@ -32,6 +33,20 @@ class ApiSubscribedEmailService {
         } catch (error) {
             throw new Error(`${error.message}`);
         }
+    }
+
+    async postSubscribedEmail(requestDto) {
+        const responseJson = await super.post(this.endpoint, requestDto);
+        return mapToCreateSubscribedEmailResponse(responseJson);
+    }
+
+    async putSubscribedEmail(id, requestDto) {
+        await super.put(this.endpoint, id, requestDto);
+        //return mapToUpdateSubscribedEmailResponse(responseJson);
+    }
+
+    async deleteSubscribedEmail(id) {
+        await super.delete(this.endpoint, id);
     }
 }
 

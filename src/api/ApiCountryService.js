@@ -1,19 +1,13 @@
-class ApiCountryService {
+import ApiBase from "./ApiBase";
+
+class ApiCountryService extends ApiBase{
     constructor(baseUrl) {
-        this.baseUrl = baseUrl;
+        super(baseUrl);
     }
 
     async fetchClientCountry(){
-        try {
-            const response = await fetch(this.baseUrl);
-            if (!response.ok) {
-                throw new Error('Failed to fetch country.');
-            }
-            const json = await response.json();
-            return json.country_name;
-        } catch (error) {
-            throw new Error(`Failed to fetch country: ${error.message}`);
-        }
+        const json = await super.get("");
+        return json.country_name;
     }
 
 }

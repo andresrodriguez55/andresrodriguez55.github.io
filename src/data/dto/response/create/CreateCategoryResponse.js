@@ -4,3 +4,5 @@ class CreateCategoryResponse {
         this.name = name;
     }
 }
+
+export default CreateCategoryResponse;

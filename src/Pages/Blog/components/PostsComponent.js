@@ -4,7 +4,7 @@ import defaultImage from '../../../Tools/Images/defaultPostImage.jpg';
 import DateUtil from '../../../util/DateUtil';
 import './PostsComponent.css';
 
-const PostsComponent = ({ posts, page, setPage, totalPages, fetchPosts, fetchingPosts }) => {
+const PostsComponent = ({ posts, page, setPage, totalPages, fetchingPosts }) => {
     const handleNextPage = () => {
         if (page < totalPages - 1 && !fetchingPosts) {
             setPage(page + 1);

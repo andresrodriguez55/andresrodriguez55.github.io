@@ -1,21 +1,30 @@
-import { mapToGetAllCategoriesResponse } from "../data/mapper/CategoryMapper";
+import { mapToGetAllCategoriesResponse, mapToCreateCategoryResponse,
+    mapToUpdateCategoryResponse } from "../data/mapper/CategoryMapper";
+import ApiBase from "./ApiBase";
 
-class ApiCategoryService {
+class ApiCategoryService extends ApiBase{
     constructor(baseUrl) {
-        this.url = `${baseUrl}categories`;
+        super(baseUrl);
+        this.endpoint = "categories";
     }
 
     async fetchCategories() {
-        try {
-            const response = await fetch(this.url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch categories');
-            }
-            const jsonArray = await response.json();
-            return jsonArray.map(category => mapToGetAllCategoriesResponse(category));
-        } catch (error) {
-            throw new Error(`Failed to fetch categories: ${error.message}`);
-        }
+        const jsonArray = await super.get(this.endpoint);
+        return jsonArray.map(category => mapToGetAllCategoriesResponse(category));
+    }
+
+    async postCategory(requestDto) {
+        const responseJson = await super.post(this.endpoint, requestDto);
+        return mapToCreateCategoryResponse(responseJson);
+    }
+
+    async putCategory(id, requestDto) {
+        await super.put(this.endpoint, id, requestDto);
+        //return mapToUpdateCategoryResponse(responseJson);
+    }
+
+    async deleteCategory(id) {
+        await super.delete(this.endpoint, id);
     }
 }
 
