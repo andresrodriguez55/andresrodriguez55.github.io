@@ -5,6 +5,8 @@ import DateUtil from '../../../util/DateUtil';
 import PostComponent from '../../Post/components/PostComponent';
 import ApiPostService from '../../../api/ApiPostService';
 import ApiCategoryService from '../../../api/ApiCategoryService';
+import UpdatePostRequest from '../../../data/dto/request/update/UpdatePostRequest';
+import CreatePostRequest from '../../../data/dto/request/create/CreatePostRequest';
 
 const PostSectionComponent = () => {
     const apiPostService = new ApiPostService(process.env.REACT_APP_BACKEND_URL);
@@ -13,7 +15,8 @@ const PostSectionComponent = () => {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
-    const [editingPost, setEditingPost] = useState(null); // For tracking edited fields
+    const [editingPost, setEditingPost] = useState(new CreatePostRequest('', '', '', '')); // For tracking edited fields
+    const [reviewPost, setReviewPost] = useState(null); // For tracking review state
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(5);
     const [pageable, setPageable] = useState({ totalPages: 0, totalElements: 0 });
@@ -58,12 +61,23 @@ const PostSectionComponent = () => {
 
     const putPost = async (updatedPost) => {
         try {
-            await apiPostService.putPost(updatedPost.id, updatedPost);
+            await apiPostService.putPost(updatedPost.id, new UpdatePostRequest(updatedPost.categoryId, updatedPost.title, updatedPost.content, updatedPost.date, updatedPost.coverPhotoLink));
             fetchPosts(); // Refresh current page
             resetSelectedPost();
         } catch (error) {
             console.log('Error updating post:', error.message);
             alert('Failed to update post');
+        }
+    };
+
+    const postNewPost = async (newPost) => {
+        try {
+            await apiPostService.postPost(new CreatePostRequest(newPost.categoryId, newPost.title, newPost.content, newPost.coverPhotoLink));
+            fetchPosts(); // Refresh current page
+            resetSelectedPost();
+        } catch (error) {
+            console.log('Error creating post:', error.message);
+            alert('Failed to create post');
         }
     };
 
@@ -80,7 +94,8 @@ const PostSectionComponent = () => {
 
     const resetSelectedPost = () => {
         setSelectedPost(null);
-        setEditingPost(null);
+        setEditingPost((prevState) => new CreatePostRequest(prevState.categoryId, prevState.title, prevState.content, prevState.coverPhotoLink));
+        setReviewPost(null);
     };
 
     const handleFieldChange = (e) => {
@@ -159,6 +174,18 @@ const PostSectionComponent = () => {
         },
     ];
 
+    const handleSave = () => {
+        if (selectedPost) {
+            putPost({ ...editingPost });
+        } else {
+            postNewPost(editingPost);
+        }
+    };
+
+    const handleReview = () => {
+        setReviewPost({ ...editingPost });
+    };
+
     return (
         <div>
             <div style={{ flex: '50%', height: '100vh', overflowY: 'auto', paddingRight: '10px' }}>
@@ -207,9 +234,9 @@ const PostSectionComponent = () => {
                             <div className="break" />
 
                             <label>Category:</label>
-                            <select id="category" value={editingPost?.category || ''} onChange={handleFieldChange}>
+                            <select id="categoryId" value={editingPost?.categoryId || ''} onChange={handleFieldChange}>
                                 {categories.map((category) => (
-                                    <option key={category.id} value={category.name}>
+                                    <option key={category.id} value={category.id}>
                                         {category.name}
                                     </option>
                                 ))}
@@ -222,7 +249,7 @@ const PostSectionComponent = () => {
 
                             <textarea
                                 className="textArea"
-                                style={{width:"100%"}}
+                                style={{ width: '100%' }}
                                 id="content"
                                 value={editingPost?.content || ''}
                                 onChange={handleTextAreaChange}
@@ -250,21 +277,27 @@ const PostSectionComponent = () => {
                                 </Button>
                                 <Button
                                     style={{ backgroundColor: '#0c7d06', width: 'auto', padding: '3px 35px', marginTop: '7px' }}
-                                    onClick={() => putPost({ ...editingPost })}
+                                    onClick={handleSave}
                                     variant="contained"
                                     type="button"
                                 >
                                     Save
                                 </Button>
+                                <Button
+                                    style={{ backgroundColor: '#0c7d06', width: 'auto', padding: '3px 35px', marginTop: '7px', marginLeft: '7px' }}
+                                    onClick={handleReview}
+                                    variant="contained"
+                                    type="button"
+                                >
+                                    Review
+                                </Button>
                             </div>
                         </div>
                     </div>
                 </div>
-                {selectedPost && (
-                    <div style={{ flex: '50%', height: '100vh', overflowY: 'auto' }}>
-                        <PostComponent post={selectedPost} />
-                    </div>
-                )}
+                <div style={{ flex: '50%', height: '100vh', overflowY: 'auto' }}>
+                    <PostComponent post={reviewPost || selectedPost || editingPost} />
+                </div>
             </div>
         </div>
     );
