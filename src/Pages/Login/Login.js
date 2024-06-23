@@ -3,7 +3,7 @@ import { Grid, Paper } from '@mui/material';
 import LoginForm from './components/LoginForm';
 import ApiSessionService from '../../api/ApiSessionService';
 import { useHistory } from 'react-router-dom';
-import { deleteToken, setToken } from '../../Tools/auth-helper';
+import { deleteToken, setToken } from '../../util/AuthHelper'
 
 export default function Login() {
     const apiSessionService = new ApiSessionService(process.env.REACT_APP_BACKEND_URL);

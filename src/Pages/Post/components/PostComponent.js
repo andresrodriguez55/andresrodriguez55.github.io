@@ -7,7 +7,7 @@ import remarkMath from 'remark-math';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import railscasts  from 'react-syntax-highlighter/dist/esm/styles/hljs/railscasts';
 import DateUtil from '../../../util/DateUtil';
-import defaultImage from '../../../Tools/Images/defaultPostImage.jpg';
+import defaultImage from '../../../static/images/DefaultPostImage.jpg'
 import style from './markdown-styles.module.css'; 
 import './PostComponent.css'; 
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
-import Blog from './Pages/Blog/Blog';
-import Post from './Pages/Post/Post';
-import Resume from './Pages/Resume/Resume';
-import About from './Pages/About/About';
-import Statistics from './Pages/Statistics/Statistics';
-import Login from './Pages/Login/Login';
-import Admin from './Pages/Admin/Admin';
-import Unsubscribe from './Pages/Unsubscribe/Unsubscribe';
+import Blog from './pages/blog/Blog';
+import Post from './pages/post/Post';
+import Resume from './pages/resume/Resume';
+import About from './pages/about/About';
+import Statistics from './pages/statistics/Statistics';
+import Login from './pages/login/Login';
+import Admin from './pages/admin/Admin';
+import Unsubscribe from './pages/unsubscribe/Unsubscribe';
 
-import Header from './Tools/Header/Header';
-import Footer from './Tools/Footer/Footer';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
 import './App.css';
 

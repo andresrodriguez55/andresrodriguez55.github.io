@@ -2,7 +2,6 @@ import React from 'react';
 import "./Resume.css";
 import { FadeLoader } from 'react-spinners';
 import { Document, Page, pdfjs } from "react-pdf";
-import SubscribeButton from '../../Tools/SubscribeButton/SubscribeButton';
 
 export default function Resume()
 {
@@ -12,9 +11,6 @@ export default function Resume()
                 className='resumePDF'
                 allow="autoplay">
             </iframe>
-            {
-                SubscribeButton()
-            }
         </div>
     );
 }

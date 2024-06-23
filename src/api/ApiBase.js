@@ -1,4 +1,4 @@
-import { getToken } from "../Tools/auth-helper";
+import { getToken } from "../util/AuthHelper";
 
 class ApiBase {
     constructor(baseUrl){

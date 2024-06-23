@@ -1,6 +1,6 @@
 import React from 'react';
 import { FadeLoader } from 'react-spinners';
-import defaultImage from '../../../Tools/Images/defaultPostImage.jpg';
+import defaultImage from '../../../static/images/DefaultPostImage.jpg'
 import DateUtil from '../../../util/DateUtil';
 import './PostsComponent.css';
 

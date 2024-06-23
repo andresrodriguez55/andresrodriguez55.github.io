@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Stack } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import DateUtil from '../../../util/DateUtil';
-import PostComponent from '../../Post/components/PostComponent';
+import PostComponent from '../../post/components/PostComponent';
 import ApiPostService from '../../../api/ApiPostService';
 import ApiCategoryService from '../../../api/ApiCategoryService';
 import UpdatePostRequest from '../../../data/dto/request/update/UpdatePostRequest';

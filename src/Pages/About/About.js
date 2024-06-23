@@ -2,7 +2,6 @@
 import logo from './taza.jpg';
 
 import "./About.css";
-import SubscribeButton from '../../Tools/SubscribeButton/SubscribeButton';
 
 export default function About()
 {
@@ -13,13 +12,11 @@ export default function About()
             <span >
                 Welcome to my mind! This is my personal space. Here I write any experience, thought or thing that I have just learned.
                 <br/><br/>
-                I am a Spanish, I was born in 1999 and I study computer engineering at Ege University located in Turkey. I love to learn new things, work hard, play the guitar and socialize with foreigners.
+                I am a Spanish, I was born in 1999 and I studied computer engineering at Ege University located in Turkey. I love to learn new things, work hard, play the guitar and socialize with foreigners.
                 <br/><br/>
                 I am a person who gives discipline to the fundamental theory of computer science, whether from expendable algorithms, whether they are data structures or optimization, to automata theory because the connection of each subject in any field is incredible.
                 <br/><br/>
                 I am focused on software development and backend. I like to know how to plan and develop optimal software for all kinds of applications.
-                <br/><br/>
-                Lately, in order to improve my knowledge about advanced algorithms and good software practices, I'm trying to learn the fundamental competitive algorithms and good software engineering practices.
             </span>
             <br/><br/>
             <hr/>
@@ -61,9 +58,6 @@ export default function About()
                     allow="autoplay" 
                 />
             </div>  
-            {
-                SubscribeButton()
-            }
         </div>
     );
 }

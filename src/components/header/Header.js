@@ -1,9 +1,7 @@
 import {useHistory} from "react-router-dom";
 
 import "./Header.css"
-import logo from '../../Tools/Images/personAndGuitar.jpg';
-
-import { prefixURLBackend } from '../PrefixURLBackend/PrefixURLBackend';
+import logo from '../../static/images/PersonAndGuitar.jpg'
 
 export default function Header() 
 {
