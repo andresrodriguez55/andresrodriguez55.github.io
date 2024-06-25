@@ -16,12 +16,12 @@ export default function Statistics()
     const [mostCommenters, setMostCommenters] = React.useState([]);
     const [moreCommentedPosts, setMoreCommentedPosts] = React.useState([]);
 
-    React.useEffect(async()=>
+    React.useEffect(()=>
     {
-        await fetchCommentsCountPerCountries();
-        await fetchCommentsCountPerMonths();
-        await fetchMostCommenters();
-        await fetchMoreCommentedPosts();
+         fetchCommentsCountPerCountries();
+         fetchCommentsCountPerMonths();
+         fetchMostCommenters();
+         fetchMoreCommentedPosts();
     }, []);
 
     const fetchCommentsCountPerCountries = async () => {

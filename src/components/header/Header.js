@@ -16,7 +16,7 @@ export default function Header()
                 break;
 
             case "projects":
-                history.push("/projects/0");
+                history.push("/Projects/0");
                 break;
 
             case "about":

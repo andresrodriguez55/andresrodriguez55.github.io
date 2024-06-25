@@ -28,7 +28,7 @@ const PostSectionComponent = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await apiPostService.fetchPostsPageable(page, "", "");
+            const response = await apiPostService.fetchPostsPageable(page, "", "All");
             setPosts(response.content);
             setPageable({
                 totalPages: response.totalPages,

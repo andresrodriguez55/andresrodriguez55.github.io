@@ -50,7 +50,7 @@ export default function Post() {
             setPost(post);
         } catch (error) {
             console.error('Failed to fetch post:', error);
-            alert('Failed to fetch post. Please try again later.');
+            //alert('Failed to fetch post. Please try again later.');
         } finally {
             setIsLoading(false);
         }
@@ -63,7 +63,7 @@ export default function Post() {
             setComments(comments);
         } catch (error) {
             console.error('Failed to fetch comments:', error);
-            alert('Failed to fetch comments. Please try again later.');
+            //alert('Failed to fetch comments. Please try again later.');
         } finally {
             //setIsLoading(false);
         }

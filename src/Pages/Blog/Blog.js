@@ -14,33 +14,43 @@ export default function Blog() {
     const [pageNum, setPageNum] = useState(parseInt(page, 10));
     const [loading, setLoading] = useState(true);
     const [totalPages, setTotalPages] = useState(0);
-    const [fetchingPosts, setFetchingPosts] = useState(false); // Track fetching status
+    const [fetchingPosts, setFetchingPosts] = useState(true);
     const isInitialMount = useRef(true);
 
     const apiPostService = new ApiPostService(process.env.REACT_APP_BACKEND_URL);
     const apiCategoryService = new ApiCategoryService(process.env.REACT_APP_BACKEND_URL);
 
-    useEffect(async() => {
-        await fetchCategories();
-        //await fetchPosts();
+    useEffect(() => {
+        const initialize = async () => {
+            await fetchCategories();
+            await fetchPosts();
+        };
+        initialize();
     }, []);
 
-    useEffect(async () => {
-        setPosts([]);
-        setPageNum(0);
-        updateURL(selectedCategory, 0);
-        await fetchPosts();
+    useEffect(() => {
+        const fetchPostsOnCategoryChange = async () => {
+            if (!isInitialMount.current) {
+                //setPosts([]);
+                setPageNum(0);
+                updateURL(selectedCategory, 0);
+                await fetchPosts();
+            }
+        };
+        fetchPostsOnCategoryChange();
     }, [selectedCategory]);
 
-    useEffect(async () => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            return;
-        }
-        updateURL(selectedCategory, pageNum);
-        await fetchPosts();
+    useEffect(() => {
+        const fetchPostsOnPageChange = async () => {
+            if (!isInitialMount.current) {
+                updateURL(selectedCategory, pageNum);
+                await fetchPosts();
+            } else {
+                isInitialMount.current = false;
+            }
+        };
+        fetchPostsOnPageChange();
     }, [pageNum]);
-
 
     const fetchCategories = async () => {
         try {
@@ -48,21 +58,19 @@ export default function Blog() {
             setCategories(categories);
         } catch (error) {
             console.error('Failed to fetch categories:', error);
-            alert('Failed to fetch categories. Please try again later.');
         }
     };
 
     const fetchPosts = async () => {
-        setFetchingPosts(true); // Start fetching
+        setFetchingPosts(true);
         try {
             const newPostsPageable = await apiPostService.fetchPostsPageable(pageNum, "", selectedCategory);
             setTotalPages(newPostsPageable.totalPages);
             setPosts(newPostsPageable.content);
         } catch (error) {
             console.error('Failed to fetch posts:', error);
-            alert('Failed to fetch posts. Please try again later.');
         } finally {
-            setFetchingPosts(false); // Finish fetching
+            setFetchingPosts(false);
             setLoading(false);
         }
     };
