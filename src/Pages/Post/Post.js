@@ -24,7 +24,7 @@ export default function Post() {
 
     const apiPostService = new ApiPostService(process.env.REACT_APP_BACKEND_URL);
     const apiCommentService = new ApiCommentService(process.env.REACT_APP_BACKEND_URL);
-    const apiCountryService = new ApiCountryService(process.env.CLIENT_COUNTRY_FINDER_API);
+    const apiCountryService = new ApiCountryService(process.env.REACT_APP_CLIENT_COUNTRY_FINDER_API);
     const apiSubscribedEmailService = new ApiSubscribedEmailService(process.env.REACT_APP_BACKEND_URL);
 
     React.useEffect(() => {
