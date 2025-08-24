@@ -36,6 +36,7 @@
     "react-spotify-web-playback": "^0.10.0",
     "react-syntax-highlighter": "^15.4.4",
     "rehype-katex": "^6.0.1",
+    "rehype-mermaid": "^3.0.0",
     "rehype-raw": "^6.1.0",
     "remark-gfm": "^2.0.0",
     "remark-math": "^5.1.0",
@@ -43,8 +44,8 @@
   },
   "scripts": {
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-  "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
-  "test": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts test",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "test": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
