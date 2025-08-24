@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeMermaid from "rehype-mermaid";
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
@@ -39,7 +40,7 @@ const PostComponent = ({ post }) => {
             </div>
             <br/>
             <ReactMarkdown
-                rehypePlugins={[rehypeRaw, remarkGfm, rehypeKatex]}
+                rehypePlugins={[rehypeRaw, remarkGfm, rehypeKatex, [rehypeMermaid, { strategy: "inline-svg" }]]}
                 components={{ code: markdownCodeThemeComponent }}
                 remarkPlugins={[remarkMath]}
                 children={post.content}
