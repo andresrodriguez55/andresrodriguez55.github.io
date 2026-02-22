@@ -1,0 +1,30 @@
+OSIV validations
+
+-----------------------------
+multiple datasources (nosql for logging)
+2fa
+logger
+custom repo impl
+criteria builder
+idempotency
+session auth - only 1 session
+redis free tier
+routing db / multi datasource for auditing
+async decorator
+async jobs priority
+audit
+filters
+graphql
+jvm optimization
+redis
+nginx
+jenkins
+semantic versioning
+
+dynamic mail content
+optimization of comments system
+
+isolation level changes for validations - write operations
+
+batching
+scheduling
